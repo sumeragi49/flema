@@ -1,0 +1,32 @@
+.item_content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+.split_item-image_container {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.split_item-text_container {
+    flex: 1;
+}
+
+.form_button {
+    margin-top: 20px;
+}
+
+.form_button-submit {
+    padding: 10px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    background: #ff0000;
+    cursor: pointer;
+}

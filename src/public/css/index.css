@@ -1,0 +1,9 @@
+.item_content {
+    margin: 0 auto;
+    padding: 20px 15px;
+    max-width: 1230px;
+}
+
+.item_content-search {
+    border-bottom: 1px solid #000;
+}
