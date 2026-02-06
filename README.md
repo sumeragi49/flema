@@ -31,3 +31,7 @@ Laravel環境構築
 ・laravel/laravel v8.6.12
 ・laravel/fortify v1.19.1
 ・laravel-lang/lang 7.0.9
+
+<img width="1995" height="1469" alt="スクリーンショット 2026-01-31 080108" src="https://github.com/user-attachments/assets/a23c11d3-23bd-4bff-b7f9-fe3177cfe749" />
+
+
