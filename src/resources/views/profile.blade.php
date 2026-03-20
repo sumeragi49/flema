@@ -9,8 +9,9 @@
     <div class="profile_form-heading">
         <h1>プロフィール設定</h1>
     </div>
-    <form class="form" action="/profile/store" method="post">
+    <form class="form" action="{{ route('profile.store') }}" method="post" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" name="user_id" value="{{ auth()->id() }}">
         <div class="form_group">
             <div class="form_group-content">
                 <input type="file" name="image" value="{{ old('image') }}" placeholder="画像を選択する">

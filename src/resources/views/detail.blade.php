@@ -4,10 +4,53 @@
 <link rel="stylesheet" href="{{ asset('css/detail.css') }}" >
 @endsection
 
+@section('nav')
+<ul class="header-nav">
+    <li class="header-nav_item">
+        @auth
+        <form class="search-form" action="{{ route('items.search') }}" method="get">
+            @csrf
+            <input type="hidden" name="tab" value="">
+            <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="何をお探しですか？" onchange="this.form.submit()">
+        </form>
+        @else
+        <form class="search-form" action="{{ route('items.search') }}" method="get">
+            @csrf
+            <input type="hidden" name="tab" value="">
+            <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="何をお探しですか？" onchange="this.form.submit()">
+        </form>
+        @endauth
+    </li>
+    <nav>
+        @auth
+        <li class="header-nav_item">
+            <form action="/logout" method="post">
+                @csrf
+                <button class="header-nav_button">ログアウト</button>
+            </form>
+        </li>
+        @else
+        <li class="header-nav_item">
+            <form action="/login" method="get">
+                @csrf
+                <button class="header-nav_button">ログイン</button>
+            </form>
+        </li>
+        @endauth
+        <li class="header-nav_mypage">
+            <a href="/profile/mypage">マイページ</a>
+        </li>
+        <li class="header-nav_sell">
+            <a href="/sell">出品</a>
+        </li>
+    </nav>
+</ul>
+@endsection
+
 @section('content')
 <div class="item_content">
     <div class="split_item-image_container">
-            <img src="{{ asset('images/' . $items['image']) }}" alt="{{ $item['name'] }}">
+        <img src="{{ asset('storage/profiles/' . $items['image']) }}" alt="{{ $items['name'] }}">
     </div>
     <div class="split_item-text_container">
         <form action="">
@@ -36,31 +79,30 @@
             <div class="container_item">
                 <h2>商品の情報</h2>
             </div>
-            <div class="container_item">
-                @foreach($items->categories as $category)
+            <div class="container_item-category">
                 <h3>カテゴリー</h3>
-                <input type="text" name="category_id" value="{{ $category['id'] }}">{{ $category['name'] }}
+                @foreach($items->categories as $category)
+                <input type="text" name="category_id" value="{{ $category['name'] }}">
                 @endforeach
             </div>
-            <div class="container_item">
+            <div class="container_item-condition">
                 <h3>商品の状態</h3>
-                <p>{{ $items->conditions['name'] }}</p>
+                <p>{{ $items->condition['name'] }}</p>
             </div>
         </form>
         <form action="">
             <div class="container_item">
-                <h2>コメント</h2>
-                <span>{{ $comments->count() }}</span>
+                <h2>コメント({{ $items->comments->count() }})</h2>
+            </div>
+            @foreach($items->comments as $comment)
+            <div class="container_item-profile">
+                <img src="{{ asset('storage/profiles/' . $comment['profile']['image']) }}" alt="{{ $comment['profile']['name'] }}">
+                <h3>{{ $comment['profile']['name'] }}</h3>
             </div>
             <div class="container_item">
-                <img src="{{ asset('images/' . $profiles['image']) }}" alt="{{ $profiles['name'] }}">
-                <h3>{{ $profiles['name'] }}</h3>
+                <input type="text" name="comment_id" value="{{ $comment['content'] }}" placeholder="こちらにコメントが入ります。">
             </div>
-            <div class="container_item">
-                @foreach($items->comments as $comment)
-                <input type="text" name="comment_id" value="{{ $comments['content'] }}" placeholder="こちらにコメントが入ります。">
-                @endforeach
-            </div>
+            @endforeach
             <div class="container_item">
                 <h3>商品へのコメント</h3>
                 <textarea name="comment_content" value="{{ old('content') }}" ></textarea>

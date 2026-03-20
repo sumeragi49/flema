@@ -1,14 +1,78 @@
-.item_content {
+nav {
     display: flex;
-    align-items: center;
-    gap: 20px;
-    border: 1px solid #ccc;
-    padding: 15px;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-content: center;
+    gap: 10px;
 }
 
-.split_item-image_container {
-    width: 150px;
-    height: 150px;
+.header-nav {
+    display: flex;
+    align-items: center;
+    justify-items: space-between;
+    float: right;
+}
+
+.header-nav_link {
+    color: #000;
+    text-decoration: none;
+    background: #fff;
+    border-radius: 3px;
+}
+
+.header-nav_link a {
+    color: #000;
+    text-decoration: none;
+    border: none;
+    background: #fff;
+    border-radius: 3px;
+}
+
+.header-nav_button {
+    border: none;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-decoration: none;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.header-nav_mypage a {
+    border: none;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-decoration: none;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.header-nav_sell a {
+    border: none;
+    padding: 5px 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-decoration: none;
+    background: #fff;
+    color: #000;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.item_content {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    padding: 20px 150px;
+}
+
+.split_item-image_container img{
+    width: 600px;
+    height: 600px;
     object-fit: cover;
 }
 
@@ -17,6 +81,7 @@
 }
 
 .form_button {
+    width: 70%;
     margin-top: 20px;
 }
 
@@ -29,4 +94,48 @@
     color: #fff;
     background: #ff0000;
     cursor: pointer;
+}
+
+.container_item-category {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.container_item-category input {
+    width: 100px;
+    text-align: center;
+    border-radius: 10px;
+    border:none;
+    background: #f0f0f0;
+}
+
+.container_item-condition {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.container_item input {
+    width: 70%;
+    padding: 10px;
+    background: #f0f0f0;
+    border: none;
+}
+
+.container_item textarea {
+    width: 70%;
+    height: 160px;
+}
+
+.container_item-profile {
+    display:flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.container_item-profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }

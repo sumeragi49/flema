@@ -62,7 +62,6 @@
     <div class="item_list">
         <div class="image-gallery">
             @foreach($items as $item)
-            <a href="/item/{{ $item['id'] }}">
                 <div class="image-item">
                     <a href="/item/{{ $item['id'] }}">
                         <div class="image-item_content">

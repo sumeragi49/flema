@@ -8,7 +8,7 @@ use App\Models\Profile;
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $userId = Auth::id();
 
@@ -19,7 +19,7 @@ class ProfileController extends Controller
     {
         $profiles['user_id'] = Auth::id();
 
-        $profiles = $request->only(['image', 'name', 'post', 'address', 'building']);
+        $profiles = $request->only(['user_id', 'image', 'name', 'post', 'address', 'building']);
 
         if(request('image')) {
             $name = request()->file('image')->getClientOriginalName();
@@ -30,8 +30,6 @@ class ProfileController extends Controller
         }
 
         Profile::create($profiles);
-
-        dd($profiles);
 
         return redirect('/dashboard');
     }

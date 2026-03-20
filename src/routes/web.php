@@ -18,12 +18,16 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/search', [ItemController::class,'search'])->name('items.search');
 
+Route::get('/item/{itemId}',[ItemController::class, 'show']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [ItemController::class, 'index'])->name('item.index');
 
     Route::get('/profile', [ProfileController::class, 'index']);
 
-    Route::post('/profile/store', [ProfileController::class, 'store']);
+    Route::post('/profile/store', [ProfileController::class, 'store'])->name('profile.store');
+
+    Route::post('comment/store', [CommentController::class, 'store'])->name('comment.store');
 });
 
 Route::middleware('guest')->group(function () {
