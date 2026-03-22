@@ -38,7 +38,7 @@
         </li>
         @endauth
         <li class="header-nav_mypage">
-            <a href="/profile/mypage">マイページ</a>
+            <a href="/mypage">マイページ</a>
         </li>
         <li class="header-nav_sell">
             <a href="/sell">出品</a>
@@ -91,7 +91,6 @@
         <form action="{{ route('comment.store') }}" method="post">
             @csrf
             <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-            <input type="hidden" name="profile_id" value="{{ $profiles['id'] }}">
             <input type="hidden" name="item_id" value="{{ $items['id'] }}">
             <div class="container_item">
                 <h2>コメント({{ $items->comments->count() }})</h2>

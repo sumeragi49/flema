@@ -25,9 +25,11 @@ Route::get('/item/{itemId}',[ItemController::class, 'show']);
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [ItemController::class, 'index'])->name('item.index');
 
-    Route::get('/profile', [ProfileController::class, 'index']);
+    Route::get('/mypage/profile', [ProfileController::class, 'index']);
 
     Route::post('/profile/store', [ProfileController::class, 'store'])->name('profile.store');
+
+    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::post('comment/store', [CommentController::class, 'store'])->name('comment.store');
 
@@ -35,7 +37,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/purchase/{itemId}/store', [OrderController::class, 'store']);
 
-    Route::get('/mypage')
+    Route::get('/mypage', [ProfileController::class, 'mypage'])->name('profile.index');
+});
 
 Route::middleware('guest')->group(function () {
     Route::get('/', [ItemController::class, 'index'])->name('items.index');

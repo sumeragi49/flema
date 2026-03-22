@@ -1,22 +1,20 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/index.css') }}" >
+<link rel="stylesheet" href="{{ asset('css/profiles.css') }}">
 @endsection
 
 @section('nav')
 <ul class="header-nav">
     <li class="header-nav_item">
         @auth
-        <form class="search-form" action="{{ route('items.search') }}" method="get">
+        <form class="search-form" action="" method="get">
             @csrf
-            <input type="hidden" name="tab" value="{{ $tab }}">
             <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="何をお探しですか？" onchange="this.form.submit()">
         </form>
         @else
         <form class="search-form" action="{{ route('items.search') }}" method="get">
             @csrf
-            <input type="hidden" name="tab" value="{{ $tab }}">
             <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="何をお探しですか？" onchange="this.form.submit()">
         </form>
         @endauth
@@ -38,7 +36,7 @@
         </li>
         @endauth
         <li class="header-nav_mypage">
-            <a href="/mypage">マイページ</a>
+            <a href="/mypage/profile">マイページ</a>
         </li>
         <li class="header-nav_sell">
             <a href="/sell">出品</a>
@@ -50,17 +48,18 @@
 
 @section('content')
 <div class="item_content">
+    <div class="item_content-profile">
+        <img src="{{ asset('storage/items/' . $profiles['image']) }}" alt="{{ $profiles['name'] }}">
+        <h2>{{ $profiles['name'] }}</h2>
+        <a href="/mypage/profile">プロフィールを編集</a>
+    </div>
     <div class="item_content-search">
-        @auth
-        <a href="{{ route('item.index', ['tab' => 'recommend']) }}" class="{{ $tab === 'recommend' ? 'active' : '' }}">おすすめ</a>
-        <a href="{{ route('item.index', ['tab' => 'myList']) }}" class="{{ $tab === 'myList' ? 'active' : '' }}">マイリスト</a>
-        @else
-        <a href="{{ route('items.index', ['tab' => 'recommend']) }}" class="{{ $tab === 'recommend' ? 'active' : '' }}">おすすめ</a>
-        <a href="{{ route('items.index', ['tab' => 'myList']) }}" class="{{ $tab === 'myList' ? 'active' : '' }}">マイリスト</a>
-        @endauth
+        <a href="{{ route('profile.index', ['page' => 'sell']) }}" class="{{ $page === 'sell' ? 'active' : '' }}">出品した商品</a>
+        <a href="{{ route('profile.index', ['page' => 'buy']) }}" class="{{ $page === 'buy' ? 'active' : '' }}">購入した商品</a>
     </div>
     <div class="item_list">
         <div class="image-gallery">
+        @if($page === 'sell')
             @foreach($items as $item)
                 <div class="image-item">
                     <a href="/item/{{ $item['id'] }}">
@@ -70,14 +69,23 @@
                         <div class="item_label">
                             <p>{{ $item['name'] }}</p>
                         </div>
-                        @if ($item->order)
-                        <div class="sold-label">
-                            <span class="sold-text">Sold</span>
-                        </div>
-                        @endif
                     </a>
                 </div>
             @endforeach
+        @elseif($page === 'buy')
+            @foreach($items as $item)
+                <div class="image-item">
+                    <a href="/item/{{ $item['id'] }}">
+                        <div class="image-item_content">
+                            <img src="{{ asset('storage/items/' . $item->item['image']) }}" alt="{{ $item->item['name'] }}">
+                        </div>
+                        <div class="item_label">
+                            <p>{{ $item->item['name'] }}</p>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        @endif
         </div>
     </div>
 </div>

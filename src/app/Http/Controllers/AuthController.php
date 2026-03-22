@@ -23,7 +23,7 @@ class AuthController extends Controller
 
         User::create($users);
 
-        return redirect('/profile');
+        return redirect('/mypage/profile');
     }
 
     public function login()

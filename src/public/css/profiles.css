@@ -39,7 +39,7 @@ nav {
     cursor: pointer;
 }
 
-.header-nav_mypage a{
+.header-nav_mypage a {
     border: none;
     margin-left: 50px;
     margin-right: 50px;
@@ -50,7 +50,7 @@ nav {
     cursor: pointer;
 }
 
-.header-nav_sell a{
+.header-nav_sell a {
     border: none;
     padding: 5px 10px;
     margin-left: 50px;
@@ -67,6 +67,32 @@ nav {
     margin: 0 auto;
     padding: 20px 15px;
     max-width: 1230px;
+}
+
+.item_content-profile {
+    display:flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    gap: 50px;
+    align-items: center;
+}
+
+.item_content-profile a {
+    margin-left: 30%;
+    text-decoration: none;
+    color:#ff0000;
+    padding: 5px 10px;
+    font-weight:bold;
+    border:1px solid #ff0000;
+    border-radius: 3px;
+}
+
+
+.item_content-profile img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }
 
 .item_content-search {
@@ -90,7 +116,7 @@ nav {
     color: rgba(255, 0, 0, 0.7) !important;
 }
 
-.item_content-search a:hover{
+.item_content-search a:hover {
     color: #ff0000;
 }
 
@@ -140,8 +166,8 @@ nav {
 }
 
 .sold-text {
-    position:absolute;
-    top:15px;
+    position: absolute;
+    top: 15px;
     right: 5px;
     transform: rotate(30deg);
     font-size: 100%;

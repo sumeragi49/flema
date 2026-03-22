@@ -33,7 +33,7 @@
                 </div>
                 <div class="container_left-item_title">
                     <h2>配送先</h2>
-                    <a href="">変更</a>
+                    <a href="/purchase/address/{{$items['id']}}">変更する</a>
                 </div>
                 <div class="container_left-item_content">
                     <div class="container_left-item_address">

@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
+use App\Models\Order;
 
 class ProfileController extends Controller
 {
     public function index(Request $request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
 
-        return view('profile', compact('userId'));
+        $profiles = Auth::user()->profile ?? new Profile();
+        $isNew = !Auth::user()->profile;
+
+        return view('profile', compact('user', 'profiles','isNew'));
     }
 
     public function store(Request $request)
@@ -32,5 +36,37 @@ class ProfileController extends Controller
         Profile::create($profiles);
 
         return redirect('/dashboard');
+    }
+
+    public function update(Request $request)
+    {
+        $profiles = $request->only(['image', 'name', 'post', 'address', 'building']);
+
+        Profile::find($request->id)->update($profiles);
+
+        return redirect('/mypage');
+    }
+
+    public function mypage(Request $request)
+    {
+        $user = Auth::user();
+
+        $profiles = $user->profile;
+
+        $page = $request->query('page', 'sell');
+
+        $items = [];
+
+        if ($page === 'buy') {
+
+            $items = $user->orders()->with('item')->get();
+
+        } else {
+
+            $items = $user->items()->get();
+
+        }
+
+        return view('profiles', compact('user', 'items', 'profiles', 'page'));
     }
 }

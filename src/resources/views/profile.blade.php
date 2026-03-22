@@ -9,12 +9,17 @@
     <div class="profile_form-heading">
         <h1>プロフィール設定</h1>
     </div>
-    <form class="form" action="{{ route('profile.store') }}" method="post" enctype="multipart/form-data">
+    <form class="form" action="{{ $isNew ? route('profile.store') : route('profile.update') }}" method="post" enctype="multipart/form-data">
         @csrf
+        @if(!$isNew)
+            @method('patch')
+        @endif
         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
         <div class="form_group">
             <div class="form_group-content">
-                <input type="file" name="image" value="{{ old('image') }}" placeholder="画像を選択する">
+                <img id="img" src="{{ asset('storage/items/' . $profiles['image'] ) }}" alt="{{ $profiles['name']  }}">
+                <input type="file" name="image" id="input" value="{{ old('image') }}" placeholder="画像を選択する">
+                <input type="hidden" name="id" value="{{ $profiles['id'] }}">
                 <div class="form_error">
                     @error('image')
                     {{ $message }}
@@ -28,7 +33,8 @@
             </div>
             <div class="form_group-content">
                 <div class="form_input">
-                    <input type="text" name="name" value="{{ old('name') }}">
+                    <input type="text" name="name" value="{{ $profiles['name'] }}">
+                    <input type="hidden" name="id" value="{{ $profiles['id'] }}">
                 </div>
                 <div class="form_error">
                     @error('name')
@@ -43,7 +49,8 @@
             </div>
             <div class="form_group-content">
                 <div class="form_input">
-                    <input type="text" name="post" value="{{ old('post') }}">
+                    <input type="text" name="post" value="{{ $profiles['post'] }}">
+                    <input type="hidden" name="id" value="{{ $profiles['id'] }}">
                 </div>
                 <div class="form_error">
                     @error('post')
@@ -58,7 +65,8 @@
             </div>
             <div class="form_group-content">
                 <div class="form_input">
-                    <input type="text" name="address" value="{{ old('address') }}">
+                    <input type="text" name="address" value="{{ $profiles['address'] }}">
+                    <input type="hidden" name="id" value="{{ $profiles['id'] }}">
                 </div>
                 <div class="form_error">
                     @error('address')
@@ -73,7 +81,8 @@
             </div>
             <div class="form_group-content">
                 <div class="form_input">
-                    <input type="text" name="building" value="{{ old('building') }}">
+                    <input type="text" name="building" value="{{ $profiles['building'] }}">
+                    <input type="hidden" name="id" value="{{ $profiles['id'] }}">
                 </div>
                 <div class="form_error">
                     @error('building')
@@ -87,4 +96,21 @@
         </div>
     </form>
 </div>
+
+<script>
+    document.querySelector('#input').addEventListener('change', (event) => {
+
+        const file = event.target.files[0]
+
+        if (!file) return
+
+        const reader = new FileReader()
+
+        reader.onload = (event) => {
+            document.querySelector('#img').src = event.target.result
+        }
+
+        reader.readAsDataURL(file)
+    })
+</script>
 @endsection
