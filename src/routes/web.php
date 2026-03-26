@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\MailSendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,10 @@ Route::get('/item/{itemId}',[ItemController::class, 'show']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [ItemController::class, 'index'])->name('item.index');
+
+    Route::get('/induction/mail', [AuthController::class, 'mailSend']);
+
+    Route::get('/mail', [MailSendController::class, 'index']);
 
     Route::get('/mypage/profile', [ProfileController::class, 'index']);
 

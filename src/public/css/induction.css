@@ -1,0 +1,27 @@
+.induction_content {
+    display:block;
+    width: 100%;
+    margin:15%;
+    text-align:center;
+}
+
+.text {
+    text-align: center;
+}
+
+.mail-url a{
+    margin: 5%;
+    padding:0.5%;
+    border:1px solid #000000;
+    border-radius: 1%;
+    font-weight:bold;
+    background:grey;
+}
+
+.re-mail-url {
+    text-align: center;
+}
+
+.re-mail-url a {
+    text-decoration:none;
+}

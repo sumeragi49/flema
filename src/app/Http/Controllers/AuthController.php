@@ -39,4 +39,9 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
+
+    public function mailSend()
+    {
+        return view('emails.induction');
+    }
 }
